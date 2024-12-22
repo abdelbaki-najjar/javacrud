@@ -38,27 +38,27 @@ if (isset($_POST['create'])) {
         return $data;
     }
 
-    // التحقق من المدخلات
+    
     $nom = validate($_POST['nom']);
     $prenom = validate($_POST['Prenom']);
     $age = validate($_POST['Age']);
 
-    // إعداد البيانات لإرسالها إلى API
+    
     $param = new stdClass(); 
     $param->nom = $nom; 
     $param->prenom = $prenom; 
     $param->age = $age; 
 
-    // إرسال الطلب
+    
     $result = insertEmployee($param);
 
-    // التحقق من النتيجة
+    
     if ($result) {
-        // افتراض أن الاستجابة تشير إلى النجاح مباشرةً
+        
         header("Location: ../index.php?success=Employee successfully created");
         exit();
     } else {
-        // في حالة وجود مشكلة
+        
         $errorMessage = isset($result['message']) ? $result['message'] : "Unknown error occurred";
         header("Location: ../index.php?error=" . urlencode("Failed to create employee: " . $errorMessage));
         exit();
